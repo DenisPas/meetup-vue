@@ -1,30 +1,57 @@
 <template>
-  <div>
-    <v-navigation-drawer v-model="sideNav"> </v-navigation-drawer>
+  <div id="app">
+    <v-app id="inspire">
+      <v-card
+          height="400"
+      >
+        <v-app-bar
+            color="deep-purple"
+            dark
+        >
+          <v-app-bar-nav-icon class="hidden-sm-and-up" @click="drawer = true"></v-app-bar-nav-icon>
 
-    <v-toolbar>
-      <v-toolbar-side-icon
-        @click.stop="sidenav = !sideNav"
-      ></v-toolbar-side-icon>
-      <v-toolbar-title> Meetup-vue</v-toolbar-title>
+          <v-toolbar-title>Title</v-toolbar-title>
+        </v-app-bar>
 
-      <v-spacer></v-spacer>
-      <v-toolbar-items>
-        <v-btn>
-          <v-icon left>mdi-account-supervisor</v-icon>
-          View Meetups
-        </v-btn>
-      </v-toolbar-items>
-    </v-toolbar>
+        <v-navigation-drawer
+            v-model="drawer"
+            absolute
+            temporary
+        >
+          <v-list
+              nav
+              dense
+          >
+            <v-list-item-group
+                v-model="group"
+                active-class="deep-purple--text text--accent-4"
+            >
+              <v-list-item>
+                <v-list-item-icon>
+                  <v-icon>mdi-home</v-icon>
+                </v-list-item-icon>
+                <v-list-item-title>Home</v-list-item-title>
+              </v-list-item>
+
+              <v-list-item>
+                <v-list-item-icon>
+                  <v-icon>mdi-account</v-icon>
+                </v-list-item-icon>
+                <v-list-item-title>Account</v-list-item-title>
+              </v-list-item>
+            </v-list-item-group>
+          </v-list>
+        </v-navigation-drawer>
+      </v-card>
+    </v-app>
   </div>
 </template>
 
 <script>
 export default {
-  data: () => {
-    return {
-      sideNav: false,
-    };
-  },
-};
+  data: () => ({
+    drawer: false,
+    group: null,
+  }),
+}
 </script>
