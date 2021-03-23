@@ -11,6 +11,14 @@
           <v-app-bar-nav-icon class="hidden-sm-and-up" @click="drawer = true"></v-app-bar-nav-icon>
 
           <v-toolbar-title>Title</v-toolbar-title>
+          <v-spacer>
+          </v-spacer>
+          <v-toolbar-items  class="hidden-xs-only">
+            <v-btn text>
+              <v-icon left>mdi-account</v-icon>
+              View Meetups
+            </v-btn>
+          </v-toolbar-items>
         </v-app-bar>
 
         <v-navigation-drawer
