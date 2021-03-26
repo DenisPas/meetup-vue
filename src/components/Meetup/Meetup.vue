@@ -3,13 +3,13 @@
     <v-row>
       <v-col cols="12">
         <v-card>
-          <v-card-title> My meetup </v-card-title>
+          <v-card-title>{{meetup.title}} </v-card-title>
           <v-img
             height="300px"
-            src="https://image.freepik.com/free-photo/st-basil-s-cathedral-red-square-moscow-russia-night_118086-2313.jpg"
+            :src="meetup.imageUrl"
           ></v-img>
           <v-card-text>
-            <div class="info--text">18 th December 2021 - Moscow</div>
+            <div class="info--text">{{ meetup.date }} - Moscow</div>
             <div>
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpa
               exercitationem maxime porro nisi placeat, beatae veniam
@@ -30,6 +30,12 @@
 <script>
 export default {
   name: "Profile",
+  props:['id'],
+  computed:{
+    meetup(){
+      return this.$store.getters.loadedMeetup(this.id)
+    }
+  }
 };
 </script>
 

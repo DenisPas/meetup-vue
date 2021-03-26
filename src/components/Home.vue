@@ -49,22 +49,11 @@
 <script>
 export default {
   name: "Home",
-  data: () => ({
-    meetups: [
-      {
-        imageUrl:
-          "https://anotherrussia.com/upload/medialibrary/ff9/moscow-saint-petersburg-1.jpg",
-        id: "2345",
-        title: "Saint Petersburg",
-      },
-      {
-        imageUrl:
-          "https://image.freepik.com/free-photo/st-basil-s-cathedral-red-square-moscow-russia-night_118086-2313.jpg",
-        id: "234555",
-        title: "Moscow",
-      },
-    ],
-  }),
+  computed:{
+    meetups(){
+      return this.$store.getters.featuredMeetups
+    }
+  },
   methods: {
     onLoadMeetup(id) {
       this.$router.push("/meetups/" + id);

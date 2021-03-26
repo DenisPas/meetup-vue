@@ -1,26 +1,26 @@
 <template>
   <v-container>
-    <v-row>
+    <v-row v-for="meetup in meetups" :key="meetup.id" class="mb-2">
       <v-col cols="12">
-        <v-card class="info mt-5">
+        <v-card class="info mt-5" >
           <v-container fluid>
             <v-row>
               <v-col cols="5">
                 <v-img
                   height="200px"
                   contain
-                  src="https://image.freepik.com/free-photo/st-basil-s-cathedral-red-square-moscow-russia-night_118086-2313.jpg"
+                  :src="meetup.imageUrl"
                 ></v-img>
               </v-col>
               <v-col cols="7">
                 <v-card-title>
                   <div class="d-block">
-                    <div>My meetup</div>
-                    <div>18 th December 2021</div>
+                    <div>{{meetup.title}}</div>
+                    <div>{{meetup.date}}</div>
                   </div>
                 </v-card-title>
                 <v-card-actions>
-                  <v-btn to="/meetups/1" text>
+                  <v-btn :to="'/meetups/' + meetup.id" text>
                     <v-icon left>mdi-play</v-icon>
                     View meetup
                   </v-btn>
@@ -37,6 +37,11 @@
 <script>
 export default {
   name: "Meetups",
+  computed:{
+    meetups(){
+      return this.$store.getters.loadedMeetups
+    }
+  }
 };
 </script>
 
