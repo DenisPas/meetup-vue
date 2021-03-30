@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row v-for="meetup in meetups" :key="meetup.id" class="mb-2">
+    <v-row v-for="meetup in meetups" :key="meetup.id">
       <v-col cols="12">
         <v-card class="info mt-5" >
           <v-container fluid>

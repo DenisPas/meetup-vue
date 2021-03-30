@@ -22,7 +22,7 @@
           <v-row>
             <v-col cols="12" sm="6" offset-md="3">
               <v-text-field
-                label="Location"
+                label="Location*"
                 id="location"
                 v-model="location"
                 :rules="[rules.required]"
@@ -33,7 +33,7 @@
           <v-row>
             <v-col cols="12" sm="6" offset-md="3">
               <v-text-field
-                label="Image URL"
+                label="Image URL*"
                 id="imageUrl"
                 v-model="imageUrl"
                 :rules="[rules.required]"
@@ -49,7 +49,7 @@
           <v-row>
             <v-col cols="12" sm="6" offset-md="3">
               <v-textarea
-                label="Discription"
+                label="Discription*"
                 id="discription"
                 v-model="discription"
                 :rules="[rules.required]"
@@ -127,7 +127,6 @@
               </v-menu>
             </v-col>
           </v-row>
-          <div>{{ dateFormatted }}</div>
           <v-row>
             <v-col cols="12" sm="6" offset-md="3">
               <v-btn type="submit " :disabled="!formIsValid"
@@ -167,9 +166,6 @@ export default {
         this.location !== "" &&
         (this.discription !== "") & (this.imageUrl !== "")
       );
-    },
-    computedDateFormatted() {
-      return this.formatDate(this.date);
     },
   },
   watch: {
