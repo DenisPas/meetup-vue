@@ -24,6 +24,10 @@
               <v-icon left>{{ item.icon }}</v-icon>
               {{ item.title }}
             </v-btn>
+            <v-btn @click="onLogout" v-if="userIsAuthenticated">
+              <v-icon left>mdi-exit-to-app</v-icon>
+              Logout
+            </v-btn>
           </v-toolbar-items>
         </v-toolbar>
 
@@ -43,6 +47,12 @@
                 </v-list-item-icon>
                 <v-list-item-title>{{ item.title }}</v-list-item-title>
               </v-list-item>
+              <v-list-item @click="onLogout" v-if="userIsAuthenticated">
+                <v-list-item-icon>
+                  <v-icon>mdi-exit-to-app</v-icon>
+                </v-list-item-icon>
+                <v-list-item-title>Logout</v-list-item-title>
+              </v-list-item>
             </v-list-item-group>
           </v-list>
         </v-navigation-drawer>
@@ -60,24 +70,40 @@ export default {
     drawer: false,
     group: null,
   }),
+  methods: {
+    onLogout() {
+      this.$store.dispatch("logout");
+    },
+  },
   computed: {
     menuItems() {
-     let menuItems = [
+      let menuItems = [
         { icon: "mdi-face", title: "Sign up", link: "/signin" },
         { icon: "mdi-lock-open", title: "Sign in", link: "/signup" },
-      ]
-      if(this.userIsAuthenticated){
+      ];
+      if (this.userIsAuthenticated) {
         menuItems = [
-          { icon: "mdi-account-multiple", title: "View Meetups", link: "/meetups" },
-          { icon: "mdi-map-marker", title: "Organize Meetup", link: "/meetup/new" },
+          {
+            icon: "mdi-account-multiple",
+            title: "View Meetups",
+            link: "/meetups",
+          },
+          {
+            icon: "mdi-map-marker",
+            title: "Organize Meetup",
+            link: "/meetup/new",
+          },
           { icon: "mdi-account", title: "Profile", link: "/profile" },
-        ]
+        ];
       }
-      return menuItems
+      return menuItems;
     },
     userIsAuthenticated() {
-      return this.$store.getters.user !== null && this.$store.getters.user !== undefined
-    }
-  }
+      return (
+        this.$store.getters.user !== null &&
+        this.$store.getters.user !== undefined
+      );
+    },
+  },
 };
 </script>

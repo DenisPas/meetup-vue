@@ -5,7 +5,7 @@ import vuetify from './plugins/vuetify';
 import router from './router'
 import { store } from './store'
 import i18n from './i18n'
-import * as firebase from 'firebase'
+import firebase from 'firebase/app';
 
 
 Vue.use(VueI18n)
@@ -27,7 +27,14 @@ new Vue({
 			storageBucket: "meetup-app-354ca.appspot.com",
 			messagingSenderId: "817928996467",
 			appId: "1:817928996467:web:57c9b21c35d67734170c06",
-			measurementId: "G-1JJ9Q4KDKP"
+			measurementId: "G-1JJ9Q4KDKP",
+			databaseURL: "https://meetup-app-354ca-default-rtdb.firebaseio.com/",
 		})
+		firebase.auth().onAuthStateChanged((user) => {
+			if (user) {
+				this.$store.dispatch('autoSignIn', user)
+			}
+		})
+		this.$store.dispatch('loadMeetups')
 	}
 }).$mount('#app')

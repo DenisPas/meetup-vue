@@ -25,6 +25,17 @@
       </v-col>
     </v-row>
     <v-row>
+      <v-col cols="12" class="text-xs-center">
+        <v-progress-circular
+          indeterminate
+          color="primary"
+          :width="7"
+          :size="70"
+          v-if="loading"
+        ></v-progress-circular>
+      </v-col>
+    </v-row>
+    <v-row v-if="!loading">
       <v-col cols="12">
         <v-carousel height="400">
           <v-carousel-item
@@ -49,10 +60,13 @@
 <script>
 export default {
   name: "Home",
-  computed:{
-    meetups(){
-      return this.$store.getters.featuredMeetups
-    }
+  computed: {
+    meetups() {
+      return this.$store.getters.featuredMeetups;
+    },
+    loading() {
+      return this.$store.getters.loading;
+    },
   },
   methods: {
     onLoadMeetup(id) {

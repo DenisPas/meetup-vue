@@ -1,5 +1,5 @@
 <template>
-  <v-contai>
+  <v-container>
     <v-row>
       <v-col cols="12" sm="6" offset-sm="3">
         <v-card>
@@ -53,7 +53,7 @@
         </v-card>
       </v-col>
     </v-row>
-  </v-contai>
+  </v-container>
 </template>
 
 <script>
@@ -72,20 +72,23 @@ export default {
         ? "Passwords do not match"
         : true;
     },
-    user(){
-      return this.$store.getters.user
-    }
+    user() {
+      return this.$store.getters.user;
+    },
   },
   watch: {
     user(value) {
-      if( value !== null && value !== undefined) {
-        this.$router.push('/')
+      if (value !== null && value !== undefined) {
+        this.$router.push("/");
       }
-    }
+    },
   },
   methods: {
     onSignUp() {
-      this.$store.dispatch('signUserUp',{email:this.email, password: this.password})
+      this.$store.dispatch("signUserUp", {
+        email: this.email,
+        password: this.password,
+      });
     },
   },
 };

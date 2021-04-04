@@ -32,13 +32,16 @@
           </v-row>
           <v-row>
             <v-col cols="12" sm="6" offset-md="3">
-              <v-text-field
-                label="Image URL*"
-                id="imageUrl"
-                v-model="imageUrl"
-                :rules="[rules.required]"
+              <v-btn raised class="primary" @click="onPickFile"
+                >Upload images</v-btn
               >
-              </v-text-field>
+              <input
+                type="file"
+                style="display: none"
+                ref="fileInput"
+                accept="image/*"
+                @change="onFilePicked"
+              />
             </v-col>
           </v-row>
           <v-row>
@@ -154,6 +157,7 @@ export default {
       menu1: false,
       menu2: false,
       time: null,
+      image: null,
       rules: {
         required: (value) => !!value || "Required.",
       },
@@ -174,6 +178,22 @@ export default {
     },
   },
   methods: {
+    onPickFile() {
+      this.$refs.fileInput.click();
+    },
+    onFilePicked(event) {
+      const files = event.target.files;
+      let filename = files[0].name;
+      if (filename.lastIndexOf(".") <= 0) {
+        return alert("Please add a valid file");
+      }
+      const fileReader = new FileReader();
+      fileReader.addEventListener("load", () => {
+        this.imageUrl = fileReader.result;
+      });
+      fileReader.readAsDataURL(files[0]);
+      this.image = files[0];
+    },
     formatDate(date) {
       if (!date) return null;
       const [year, month, day] = date.split("-");
@@ -189,10 +209,13 @@ export default {
       if (!this.formIsValid) {
         return;
       }
+      if (!this.image) {
+        return;
+      }
       const meetupData = {
         title: this.title,
         location: this.location,
-        imageUrl: this.imageUrl,
+        image: this.image,
         discription: this.discription,
         date: this.date,
         time: this.time,
