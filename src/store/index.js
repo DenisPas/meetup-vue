@@ -56,7 +56,7 @@ export const store = new Vuex.Store({
 							imageUrl: obj[key].imageUrl,
 							date: obj[key].date,
 							creatorId: obj[key].creatorId,
-
+							location: obj[key].location,
 						})
 					}
 					commit('setLoadedMeetups', meetups)
