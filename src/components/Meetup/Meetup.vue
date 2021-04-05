@@ -20,7 +20,7 @@
               {{ $d(Date.parse(meetup.date)) }} - {{ meetup.location }}
             </div>
             <div>
-              {{ meetup.discription }}
+              {{ meetup.description }}
             </div>
           </v-card-text>
           <v-card-actions>

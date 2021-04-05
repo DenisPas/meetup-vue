@@ -52,9 +52,9 @@
           <v-row>
             <v-col cols="12" sm="6" offset-md="3">
               <v-textarea
-                label="Discription*"
-                id="discription"
-                v-model="discription"
+                label="Description*"
+                id="description"
+                v-model="description"
                 :rules="[rules.required]"
               >
               </v-textarea>
@@ -150,7 +150,7 @@ export default {
     return {
       title: "",
       location: "",
-      discription: "",
+      description: "",
       imageUrl: "",
       date: new Date().toISOString().substr(0, 10),
       dateFormatted: vm.formatDate(new Date().toISOString().substr(0, 10)),
@@ -168,7 +168,7 @@ export default {
       return (
         this.title !== "" &&
         this.location !== "" &&
-        (this.discription !== "") & (this.imageUrl !== "")
+        (this.description !== "") & (this.imageUrl !== "")
       );
     },
   },
@@ -216,12 +216,12 @@ export default {
         title: this.title,
         location: this.location,
         image: this.image,
-        discription: this.discription,
+        description: this.description,
         date: this.date,
         time: this.time,
       };
       this.$store.dispatch("createMeetup", meetupData);
-      this.$router.push["/meetups"];
+      this.$router.push['/meetups'];
     },
   },
 };
