@@ -104,6 +104,12 @@ export const store = new Vuex.Store({
 
                 })
                 .then(fileData => {
+                    const filename = payload.image.name
+                    const ext = filename.slice(filename.lastIndexOf('.'))
+                    firebase.storage().ref('meetups/' + key + ext).getDownloadURL()
+                        .then((url) => {
+                            console.log(url)
+                        })
                     imageUrl = fileData.metadata.downloadURLs[0]
                     return firebase.database().ref('meetups').child(key).update({imageUrl: imageUrl})
                 })
