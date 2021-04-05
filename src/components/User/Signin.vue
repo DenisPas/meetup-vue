@@ -1,5 +1,10 @@
 <template>
   <v-container>
+    <v-row v-if="error">
+      <v-col cols="12" sm="6" offset-sm="3">
+        <app-alert @dismissed="onDismissed" :text="error.message"></app-alert>
+      </v-col>
+    </v-row>
     <v-row>
       <v-col cols="12" sm="6" offset-sm="3">
         <v-card>
@@ -32,7 +37,11 @@
                 </v-row>
                 <v-row>
                   <v-col cols="12">
-                    <v-btn type="submit">Sign in</v-btn>
+                    <v-btn type="submit" :disabled="loading" :loading="loading">Sign in
+                      <span slot="loader" class="custom-loader">
+                      <v-icon light>mdi-cached</v-icon>
+                    </span>
+                    </v-btn>
                   </v-col>
                 </v-row>
               </form>
@@ -56,7 +65,14 @@ export default {
   computed: {
     user(){
       return this.$store.getters.user
-    }
+    },
+    loading() {
+      return this.$store.getters.loading
+    },
+    error() {
+      return this.$store.getters.error
+    },
+
   },
   watch: {
     user(value) {
@@ -69,6 +85,10 @@ export default {
     onSignIn() {
       this.$store.dispatch('signUserIn',{email:this.email, password: this.password})
     },
+    onDismissed() {
+      console.log('dismissed')
+      this.$store.dispatch('cleaerError')
+    }
   },
 };
 </script>
