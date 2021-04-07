@@ -105,7 +105,6 @@ export default {
       return menuItems;
     },
     userIsAuthenticated() {
-      console.log('check')
       return (
         this.$store.getters.user !== null &&
         this.$store.getters.user !== undefined

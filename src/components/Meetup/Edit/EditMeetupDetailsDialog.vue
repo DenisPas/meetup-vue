@@ -1,8 +1,10 @@
 <template>
-  <v-dialog width="350px" persistent v-model="editDialog">
-    <v-btn fab accent slot="activator">
+  <v-dialog width="350px" persistent v-model="editDialog" transition="dialog-bottom-transition">
+    <template v-slot:activator="{ on, attrs }">
+    <v-btn fab accent v-on="on" v-bind="attrs">
       <v-icon>mdi-edit</v-icon>
     </v-btn>
+    </template>
     <v-card>
       <v-container>
         <v-row>
@@ -10,7 +12,7 @@
             <v-card-text>Edit meetup</v-card-text>
           </v-col>
         </v-row>
-        <d-divider></d-divider>
+        <v-divider></v-divider>
         <v-row>
           <v-col cols="12">
             <v-card-text>
@@ -29,14 +31,14 @@
             </v-card-text>
           </v-col>
         </v-row>
-        <d-divider></d-divider>
+        <v-divider></v-divider>
         <v-row>
           <v-col cols="12">
             <v-card-action>
-              <v-btn @click="editDialog = false" flat class="blue--text darken-1">
+              <v-btn @click="editDialog = false" text class="blue--text darken-1">
                 Close
               </v-btn>
-              <v-btn @click="onSaveChanges" flat class="blue--text darken-1">
+              <v-btn @click="onSaveChanges" text class="blue--text darken-1">
                 Save
               </v-btn>
             </v-card-action>

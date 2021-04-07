@@ -1,8 +1,10 @@
 <template>
-  <v-dialog width="350px" persistent v-model="editDialog">
-    <v-btn accent slot="activator">
+  <v-dialog width="350px" persistent v-model="editDialog" transition="dialog-bottom-transition">
+    <template v-slot:activator="{ on, attrs }">
+    <v-btn accent v-on="on" v-bind="attrs">
       Edit Time
     </v-btn>
+    </template>
     <v-card>
       <v-container>
         <v-row>
@@ -10,22 +12,22 @@
             <v-card-text>Edit Meetup Time</v-card-text>
           </v-col>
         </v-row>
-        <d-divider></d-divider>
+        <v-divider></v-divider>
         <v-row>
           <v-col cols="12">
             <v-time-picker v-model="editableTime" style="width: 100%" actions format="24hr">
               <template>
-                <v-btn flat class="blue--text darken-1" @click.native="editDialog = false">
+                <v-btn text class="blue--text darken-1" @click.native="editDialog = false">
                   Close
                 </v-btn>
-                <v-btn flat class="blue--text darken-1" @click.native="onSaveChanges">
+                <v-btn text class="blue--text darken-1" @click.native="onSaveChanges">
                   Save
                 </v-btn>
               </template>
             </v-time-picker>
           </v-col>
         </v-row>
-        <d-divider></d-divider>
+        <v-divider></v-divider>
       </v-container>
     </v-card>
   </v-dialog>

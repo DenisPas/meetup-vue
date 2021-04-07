@@ -71,7 +71,7 @@ export default {
       if (!this.userIsAuthenticated) {
         return false;
       }
-      return this.$store.getters.user.id === this.meetup.creator.id;
+      return this.$store.getters.user.id === this.meetup.creatorId;
     },
   },
 };
