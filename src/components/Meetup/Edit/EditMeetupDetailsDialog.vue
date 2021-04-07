@@ -1,8 +1,8 @@
 <template>
   <v-dialog width="350px" persistent v-model="editDialog" transition="dialog-bottom-transition">
     <template v-slot:activator="{ on, attrs }">
-    <v-btn fab accent v-on="on" v-bind="attrs">
-      <v-icon>mdi-edit</v-icon>
+    <v-btn color="primary" dark fab v-on="on" v-bind="attrs">
+      <v-icon dark>mdi-pencil</v-icon>
     </v-btn>
     </template>
     <v-card>
@@ -34,14 +34,14 @@
         <v-divider></v-divider>
         <v-row>
           <v-col cols="12">
-            <v-card-action>
+            <v-card-actions>
               <v-btn @click="editDialog = false" text class="blue--text darken-1">
                 Close
               </v-btn>
               <v-btn @click="onSaveChanges" text class="blue--text darken-1">
                 Save
               </v-btn>
-            </v-card-action>
+            </v-card-actions>
           </v-col>
         </v-row>
       </v-container>
