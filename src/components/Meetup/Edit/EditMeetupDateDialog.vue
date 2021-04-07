@@ -14,12 +14,12 @@
         <v-row>
           <v-col cols="12">
             <v-date-picker v-model="editableDate" style="width: 100%" actions>
-              <template >
+              <template>
                 <v-btn flat class="blue--text darken-1" @click.native="editDialog = false">
                   Close
                 </v-btn>
                 <v-btn flat class="blue--text darken-1" @click.native="onSaveChanges">
-Save
+                  Save
                 </v-btn>
               </template>
             </v-date-picker>
@@ -52,7 +52,7 @@ export default {
       newDate.setUTCDate(newDay)
       newDate.setUTCMonth(newMonth)
       newDate.setUTCFullYear(newYear)
-      this.$store.dispatch('updateMeetupData',{
+      this.$store.dispatch('updateMeetupData', {
         id: this.meetup.id,
         date: newDate
 
