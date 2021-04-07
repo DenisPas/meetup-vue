@@ -84,8 +84,8 @@ export default {
   computed: {
     menuItems() {
       let menuItems = [
-        { icon: "mdi-face", title: "Sign up", link: "/signin" },
-        { icon: "mdi-lock-open", title: "Sign in", link: "/signup" },
+        { icon: "mdi-face", title: "Sign up", link: "/signup" },
+        { icon: "mdi-lock-open", title: "Sign in", link: "/signin" },
       ];
       if (this.userIsAuthenticated) {
         menuItems = [
@@ -105,6 +105,7 @@ export default {
       return menuItems;
     },
     userIsAuthenticated() {
+      console.log('check')
       return (
         this.$store.getters.user !== null &&
         this.$store.getters.user !== undefined
