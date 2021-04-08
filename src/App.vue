@@ -1,8 +1,8 @@
 <template>
-  <div id="app">
-    <v-app id="inspire">
-      <div>
-        <v-toolbar color="deep-purple" dark>
+  <div id="app" >
+    <v-app id="inspire" style="background: linear-gradient(rgb(34, 32, 44), rgb(64, 40, 69))!important;">
+      <div >
+        <v-toolbar color="primary" dark>
           <v-app-bar-nav-icon
             class="hidden-sm-and-up"
             @click="drawer = true"
