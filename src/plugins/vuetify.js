@@ -10,6 +10,7 @@ export default new Vuetify({
             light: {
                 primary: '#f94d6a',
                 input: '#2a1f31',
+                btnColor: '#b460bb',
             },
         },
     },

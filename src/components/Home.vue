@@ -39,11 +39,13 @@
       <v-col cols="12">
         <v-carousel height="400">
           <v-carousel-item
-            v-for="meetup in meetups"
-            :key="meetup.id"
-            :src="meetup.imageUrl"
-            @click="onLoadMeetup(meetup.id)"
+              v-for="meetup in meetups"
+              :key="meetup.id"
+              @click="onLoadMeetup(meetup.id)"
           >
+            <v-img contain height="300px" :src="meetup.imageUrl" >
+
+            </v-img>
             <div class="title">{{ meetup.title }}</div>
           </v-carousel-item>
         </v-carousel>

@@ -1,18 +1,19 @@
 <template>
   <v-container>
-    <v-row>
-      <v-col cols="12" sm="6" offset-sm="3">
-        <h4>Create meetup</h4>
+    <v-row class="justify-center mt-5">
+      <v-col cols="8" sm="6" class="text-center">
+        <h1 class="white--text">Create meetup</h1>
       </v-col>
     </v-row>
-    <v-row>
-      <v-col cols="12">
+    <v-row class="justify-center">
+      <v-col cols="8">
         <form @submit.prevent="onCreateMeetup">
           <v-row>
-            <v-col cols="12" sm="6" offset-md="3">
+            <v-col cols="8" sm="6" offset-md="3">
               <v-text-field
                 label="Title*"
                 id="title"
+                dark
                 v-model="title"
                 :rules="[rules.required]"
               >
@@ -20,21 +21,26 @@
             </v-col>
           </v-row>
           <v-row>
-            <v-col cols="12" sm="6" offset-md="3">
+            <v-col cols="8" sm="6" offset-md="3">
               <v-text-field
                 label="Location*"
                 id="location"
+                dark
                 v-model="location"
                 :rules="[rules.required]"
               >
               </v-text-field>
             </v-col>
           </v-row>
-          <v-row>
-            <v-col cols="12" sm="6" offset-md="3">
+          <v-row class="justify-center">
+            <v-col cols="8" sm="6" class="text-center">
               <v-btn raised class="primary" @click="onPickFile"
-                >Upload images</v-btn
+              >Upload images</v-btn
               >
+            </v-col>
+          </v-row>
+          <v-row class="justify-center">
+            <v-col cols="8" sm="6" offset-md="3">
               <input
                 type="file"
                 style="display: none"
@@ -44,29 +50,30 @@
               />
             </v-col>
           </v-row>
-          <v-row>
-            <v-col cols="12" sm="6" offset-md="3">
-              <v-img :src="imageUrl" height="150"> </v-img>
+          <v-row v-if="imageUrl !== ''">
+            <v-col cols="8" sm="6" offset-md="3">
+              <v-img :src="imageUrl" height="250"> </v-img>
             </v-col>
           </v-row>
           <v-row>
-            <v-col cols="12" sm="6" offset-md="3">
+            <v-col cols="8" sm="6" offset-md="3">
               <v-textarea
                 label="Description*"
                 id="description"
+                dark
                 v-model="description"
                 :rules="[rules.required]"
               >
               </v-textarea>
             </v-col>
           </v-row>
-          <v-row>
-            <v-col cols="12" sm="6" offset-md="3">
-              <h4>Choose date and time</h4>
+          <v-row class="justify-center">
+            <v-col cols="8" sm="6" class="text-center">
+              <h3 class="white--text">Choose date and time</h3>
             </v-col>
           </v-row>
           <v-row>
-            <v-col cols="12" sm="6" offset-md="3">
+            <v-col cols="8" sm="6" offset-md="3">
               <v-menu
                 ref="menu1"
                 v-model="menu1"
@@ -82,6 +89,7 @@
                     label="Date"
                     hint="MM/DD/YYYY format"
                     persistent-hint
+                    dark
                     prepend-icon="mdi-calendar"
                     v-bind="attrs"
                     @blur="date = parseDate(dateFormatted)"
@@ -98,7 +106,7 @@
           </v-row>
           <div></div>
           <v-row>
-            <v-col cols="12" sm="6" offset-md="3">
+            <v-col cols="8" sm="6" offset-md="3">
               <v-menu
                 ref="menu"
                 v-model="menu2"
@@ -114,6 +122,7 @@
                   <v-text-field
                     v-model="time"
                     label="Picker in menu"
+                    dark
                     prepend-icon="mdi-clock-time-four-outline"
                     readonly
                     v-bind="attrs"
@@ -130,9 +139,9 @@
               </v-menu>
             </v-col>
           </v-row>
-          <v-row>
-            <v-col cols="12" sm="6" offset-md="3">
-              <v-btn type="submit " :disabled="!formIsValid"
+          <v-row class="justify-center">
+            <v-col cols="12" sm="6" class="text-center">
+              <v-btn class="primary" type="submit " :disabled="!formIsValid"
                 >Create meetup</v-btn
               >
             </v-col>
@@ -171,6 +180,12 @@ export default {
         (this.description !== "") & (this.imageUrl !== "")
       );
     },
+    localTime() {
+      const options = { year: 'numeric', month: 'short', day: 'numeric' };
+      const date = this.time.toLocaleDateString('ru-RU', options);
+      const time = this.time.toLocaleTimeString('ru-RU');
+      return `${date} ${time} (лок)`;
+    }
   },
   watch: {
     date() {

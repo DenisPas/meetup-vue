@@ -2,6 +2,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
 import "firebase/storage";
+import router from '../../router';
 
 export default {
     state: {
@@ -59,6 +60,7 @@ export default {
         },
         onLogout({commit}) {
             firebase.auth().signOut()
+            router.push("/signin");
             commit('setUser', null)
         },
         signUserUp({commit}, payload) {

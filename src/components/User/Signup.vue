@@ -5,15 +5,18 @@
         <app-alert @dismissed="onDismissed" :text="error.message"></app-alert>
       </v-col>
     </v-row>
-    <v-row>
+    <v-row style="height: 100vh" class="align-center">
       <v-col cols="12" sm="6" offset-sm="3">
-        <v-card>
+        <v-card class="align-center" style="background: transparent!important;" elevation="0">
           <v-card-text>
             <v-container>
               <form @submit.prevent="onSignUp">
-                <v-row>
-                  <v-col cols="12">
+                <v-row class="justify-center">
+                  <v-col cols="8">
                     <v-text-field
+                        outlined
+                        dense
+                        background-color="input"
                         id="email"
                         label="Email"
                         v-model="email"
@@ -23,9 +26,14 @@
                     </v-text-field>
                   </v-col>
                 </v-row>
-                <v-row>
-                  <v-col cols="12">
+                <v-row class="justify-center">
+                  <v-col cols="8">
                     <v-text-field
+                        outlined
+                        dense
+                        flat
+                        class="text--white"
+                        background-color="input"
                         id="password"
                         label="Password"
                         v-model="password"
@@ -35,9 +43,14 @@
                     </v-text-field>
                   </v-col>
                 </v-row>
-                <v-row>
-                  <v-col cols="12">
+                <v-row class="justify-center">
+                  <v-col cols="8">
                     <v-text-field
+                        outlined
+                        dense
+                        flat
+                        class="text--white"
+                        background-color="input"
                         id="confirmPassword"
                         label="Confirm Password"
                         v-model="confirmPassword"
@@ -47,13 +60,21 @@
                     </v-text-field>
                   </v-col>
                 </v-row>
-                <v-row>
-                  <v-col cols="12">
-                    <v-btn type="submit" :disabled="loading" :loading="loading">Sign up
+                <v-row class="justify-center">
+                  <v-col cols="8">
+                    <v-btn block color="primary" type="submit" :disabled="loading" :loading="loading">Sign up
                       <span slot="loader" class="custom-loader">
                       <v-icon light>mdi-cached</v-icon>
                     </span>
                     </v-btn>
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col class="text-center" cols="12">
+                    <span style="color: white!important;" class="subtitle-1">Already have an account?
+                    <v-btn to="/signin" text color="primary">
+    Sign In
+                    </v-btn></span>
                   </v-col>
                 </v-row>
               </form>

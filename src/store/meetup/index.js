@@ -5,24 +5,7 @@ import "firebase/storage";
 
 export default {
     state: {
-        loadedMeetups: [{
-            imageUrl:
-                "https://anotherrussia.com/upload/medialibrary/ff9/moscow-saint-petersburg-1.jpg",
-            id: "2345",
-            title: "Saint Petersburg",
-            date: "2021-09-22",
-            location: "spb",
-            description: "43r43rfge"
-        },
-            {
-                imageUrl:
-                    "https://image.freepik.com/free-photo/st-basil-s-cathedral-red-square-moscow-russia-night_118086-2313.jpg",
-                id: "234555",
-                title: "Moscow",
-                date: "2021-07-22",
-                location: "New York",
-                description: "trgretgvtr",
-            }],
+        loadedMeetups: [],
     },
     mutations: {
         setLoadedMeetups(state, payload) {

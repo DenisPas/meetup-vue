@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <p>
-      The user page
-    </p>
+  <div class="text-center mt-3">
+    <h2 class="white--text">
+      Profile settings will be here
+    </h2>
   </div>
 </template>
 

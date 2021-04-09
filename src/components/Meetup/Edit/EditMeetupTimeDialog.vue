@@ -1,7 +1,7 @@
 <template>
   <v-dialog width="350px" persistent v-model="editDialog" transition="dialog-bottom-transition">
     <template v-slot:activator="{ on, attrs }">
-    <v-btn accent v-on="on" v-bind="attrs">
+    <v-btn color="btnColor" class="white--text mr-4" accent v-on="on" v-bind="attrs">
       Edit Time
     </v-btn>
     </template>

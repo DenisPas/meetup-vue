@@ -1,5 +1,5 @@
-<template>
-  <v-container>
+<template >
+  <v-container >
     <v-row v-if="error">
       <v-col cols="12" sm="6" offset-sm="3">
         <app-alert @dismissed="onDismissed" :text="error.message"></app-alert>
@@ -21,6 +21,7 @@
                         label="Email"
                         v-model="email"
                         type="email"
+                        :rules="[rules.required]"
                     >
                     </v-text-field>
                   </v-col>
@@ -31,8 +32,7 @@
                         outlined
                         dense
                         flat
-                        class="text--white search-field"
-                        color="white"
+                        class="text--white"
                         background-color="input"
                         id="password"
                         label="Password"
@@ -55,7 +55,7 @@
                 <v-row>
                   <v-col class="text-center" cols="12">
                     <span style="color: white!important;" class="subtitle-1">Don’t have an account?
-                    <v-btn text color="primary">
+                    <v-btn to="/signup" text color="primary">
     Sign Up
                     </v-btn></span>
                   </v-col>
@@ -76,6 +76,9 @@ export default {
     return {
       email: "",
       password: "",
+      rules: {
+        required: (value) => !!value || "Required.",
+      },
     };
   },
   computed: {
