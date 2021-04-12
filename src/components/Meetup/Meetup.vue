@@ -12,7 +12,7 @@
     </v-row>
     <v-row v-else>
       <v-col cols="12">
-        <v-card color="primary">
+        <v-card color="primary" max-width="70%" class="mx-auto">
           <v-card-title class="justify-center mt-2 white--text">
             <h2>
               {{ meetup.title }}
@@ -20,8 +20,8 @@
           </v-card-title>
           <v-img contain height="300px" :src="meetup.imageUrl"></v-img>
           <v-card-text class="ml-4 mt-2">
-            <div class="white--text mb-3 subtitle-1">
-              {{ $d(Date.parse(meetup.date)) }} - {{ meetup.location }}
+            <div class="white--text mb-3 text-h6">
+              {{ meetup.date | date }} {{meetup.time}} - {{ meetup.location }}
             </div>
             <div>
               <app-edit-meetup-date-dialog :meetup="meetup" v-if="userIsCreator">
@@ -51,6 +51,8 @@
 </template>
 
 <script>
+import {format} from "date-fns";
+
 export default {
   name: "Profile",
   props: ["id"],
@@ -59,7 +61,12 @@ export default {
       return this.$store.getters.loading;
     },
     meetup() {
-      return this.$store.getters.loadedMeetup(this.id);
+     let meet = this.$store.getters.loadedMeetup(this.id);
+      let date = new Date()
+      date.setTime(meet.date)
+      let convertDate = date
+      let convertTime = this.convertTimeFromServer(date);
+      return {...meet, date: convertDate, time: convertTime}
     },
     userIsAuthenticated() {
       return (
@@ -73,6 +80,15 @@ export default {
       }
       return this.$store.getters.user.id === this.meetup.creatorId;
     },
+  },
+  methods:{
+    convertTimeFromServer(date) {
+      if (date) {
+        const TIME_FORMAT = 'HH:mm';
+        return format(date, TIME_FORMAT);
+      }
+      return null;
+    }
   },
 };
 </script>

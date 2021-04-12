@@ -7,6 +7,7 @@ import { store } from './store'
 import i18n from './i18n'
 import firebase from "firebase/app";
 import "firebase/auth";
+import DateFilter from './filters/date'
 // import firebase from 'firebase';
 // import * as firebase from 'firebase'
 import AlertCmp from './components/Shared/Alert.vue'
@@ -16,7 +17,7 @@ import EditMeetupDateDialog from './components/Meetup/Edit/EditMeetupDateDialog.
 import EditMeetupTimeDialog from './components/Meetup/Edit/EditMeetupTimeDialog.vue'
 import RegisterDialog from './components/Meetup/Registration/RegisterDialog.vue'
 
-
+Vue.filter('date', DateFilter)
 Vue.use(VueI18n)
 Vue.component('app-edit-meetup-details-dialog', EditMeetupDetailsDialog)
 Vue.component('app-edit-meetup-date-dialog', EditMeetupDateDialog)

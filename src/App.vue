@@ -10,7 +10,7 @@
 
           <v-toolbar-title>
             <router-link to="/" tag="span" style="cursor: pointer">
-              Title
+              Meetups
             </router-link>
           </v-toolbar-title>
           <v-spacer> </v-spacer>

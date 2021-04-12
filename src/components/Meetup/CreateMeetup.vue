@@ -39,11 +39,15 @@
               >
             </v-col>
           </v-row>
-          <v-row class="justify-center">
+          <v-row class="text-center" v-if="!imageUrl" >
+            <v-col>
+              <div class="red--text">Select image!</div>
+            </v-col>
+          </v-row>
+          <v-row class="justify-center" style="display: none">
             <v-col cols="8" sm="6" offset-md="3">
               <input
                 type="file"
-                style="display: none"
                 ref="fileInput"
                 accept="image/*"
                 @change="onFilePicked"
@@ -87,7 +91,7 @@
                   <v-text-field
                     v-model="dateFormatted"
                     label="Date"
-                    hint="MM/DD/YYYY format"
+                    hint="DD/MM/YYYY format"
                     persistent-hint
                     dark
                     prepend-icon="mdi-calendar"
@@ -102,6 +106,11 @@
                   @input="menu1 = false"
                 ></v-date-picker>
               </v-menu>
+            </v-col>
+          </v-row>
+          <v-row class="text-center" v-if="isWrongDate">
+            <v-col>
+              <div class="red--text">Date must be more then current date!</div>
             </v-col>
           </v-row>
           <div></div>
@@ -121,7 +130,7 @@
                 <template v-slot:activator="{ on, attrs }">
                   <v-text-field
                     v-model="time"
-                    label="Picker in menu"
+                    label="Select time"
                     dark
                     prepend-icon="mdi-clock-time-four-outline"
                     readonly
@@ -139,7 +148,7 @@
               </v-menu>
             </v-col>
           </v-row>
-          <v-row class="justify-center">
+          <v-row class="justify-center mb-5">
             <v-col cols="12" sm="6" class="text-center">
               <v-btn class="primary" type="submit " :disabled="!formIsValid"
                 >Create meetup</v-btn
@@ -153,6 +162,7 @@
 </template>
 
 <script>
+import { format, parse } from 'date-fns'
 export default {
   name: "CreateMeetup",
   data(vm) {
@@ -166,7 +176,9 @@ export default {
       menu1: false,
       menu2: false,
       time: null,
+      isWrongDate: false,
       image: null,
+      dateToServer: '',
       rules: {
         required: (value) => !!value || "Required.",
       },
@@ -180,19 +192,41 @@ export default {
         (this.description !== "") & (this.imageUrl !== "")
       );
     },
-    localTime() {
-      const options = { year: 'numeric', month: 'short', day: 'numeric' };
-      const date = this.time.toLocaleDateString('ru-RU', options);
-      const time = this.time.toLocaleTimeString('ru-RU');
-      return `${date} ${time} (лок)`;
-    }
   },
   watch: {
     date() {
       this.dateFormatted = this.formatDate(this.date);
+        if (this.date && this.time) {
+          this.updateDate(this.date + 'T' + this.time);
+        }
+    },
+    time() {
+      if (this.date && this.time) {
+        this.updateDate(this.date + 'T' + this.time);
+      }
     },
   },
   methods: {
+    updateDate(date) {
+    const DATE_TIME_FORMAT = 'yyyy-MM-dd HH:mm';
+    const DATE_TIME_LONG_FORMAT = "yyyy-MM-dd'T'HH:mm";
+    const currentDate = format(new Date(), DATE_TIME_FORMAT);
+    const updatedDate = format(new Date(date), DATE_TIME_FORMAT);
+
+    if (currentDate > updatedDate) {
+      this.isWrongDate = true;
+      return;
+    }
+
+    this.isWrongDate = false;
+
+    if (date) {
+      this.dateToServer = parse(date, DATE_TIME_LONG_FORMAT, new Date());
+      this.dateToServer = this.dateToServer.getTime()
+    } else {
+      this.dateToServer = null;
+    }
+  },
     onPickFile() {
       this.$refs.fileInput.click();
     },
@@ -232,8 +266,7 @@ export default {
         location: this.location,
         image: this.image,
         description: this.description,
-        date: this.date,
-        time: this.time,
+        date: this.dateToServer,
       };
       this.$store.dispatch("createMeetup", meetupData);
       this.$router.push("/meetups");

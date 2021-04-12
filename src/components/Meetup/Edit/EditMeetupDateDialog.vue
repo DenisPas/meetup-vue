@@ -8,8 +8,8 @@
     <v-card>
       <v-container>
         <v-row>
-          <v-col cols="12">
-            <v-card-text>Edit Meetup Date</v-card-text>
+          <v-col cols="12" class="text-center">
+            <v-card-text class="text-h5">Edit Meetup Date</v-card-text>
           </v-col>
         </v-row>
         <v-divider></v-divider>
@@ -54,15 +54,16 @@ export default {
       newDate.setUTCDate(newDay)
       newDate.setUTCMonth(newMonth)
       newDate.setUTCFullYear(newYear)
-      this.$store.dispatch('updateMeetupData', {
-        id: this.meetup.id,
-        date: newDate
-
-      })
+      console.log(newDate)
+      // this.$store.dispatch('updateMeetupData', {
+      //   id: this.meetup.id,
+      //   date: newDate
+      // })
     }
   },
   created() {
-    this.editableDate = new Date(this.meetup.date)
+    console.log(this.meetup.date)
+    this.editableDate = new Date(this.meetup.date).toISOString().substr(0, 10)
   }
 };
 </script>

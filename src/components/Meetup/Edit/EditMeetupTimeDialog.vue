@@ -8,8 +8,8 @@
     <v-card>
       <v-container>
         <v-row>
-          <v-col cols="12">
-            <v-card-text>Edit Meetup Time</v-card-text>
+          <v-col cols="12" class="text-center">
+            <v-card-text class="text-h5">Edit Meetup Time</v-card-text>
           </v-col>
         </v-row>
         <v-divider></v-divider>
@@ -34,6 +34,7 @@
 </template>
 
 <script>
+
 export default {
   props: ['meetup'],
   name: "Meetups",
@@ -47,19 +48,19 @@ export default {
   },
   methods: {
     onSaveChanges() {
-      const newDate = new Date(this.meetup.date)
+      let newDate = new Date(this.meetup.date)
       const hours = this.editableTime.match(/^(\d+)/)[1]
       const minutes = this.editableTime.match(/:(\d+)/)[1]
       newDate.setHours(hours)
       newDate.setMinutes(minutes)
       this.$store.dispatch('updateMeetupData', {
         id: this.meetup.id,
-        date: newDate
+        date: newDate.getTime()
       })
-    }
+    },
   },
   created() {
-    this.editableTime = new Date(this.meetup.date).toTimeString()
+    this.editableTime = this.meetup.time
   }
 };
 </script>

@@ -56,7 +56,7 @@ export default {
                     console.log(error)
                 })
         },
-        createMeetup({commit, getters}, payload) {
+        createMeetup({getters}, payload) {
             const meetup = {
                 title: payload.title,
                 location: payload.location,
@@ -64,7 +64,7 @@ export default {
                 date: payload.date,
                 creatorId: getters.user.id
             }
-            let imageUrl
+
             let key
             firebase.database().ref('meetups').push(meetup)
                 .then((data) => {
@@ -80,15 +80,10 @@ export default {
                     return firebase.storage().ref(fileData.metadata.fullPath).getDownloadURL()
                 })
                 .then((url) => {
-                    imageUrl = url
                     return firebase.database().ref('meetups').child(key).update({imageUrl: url})
                 })
                 .then(() => {
-                    commit('createMeetup', {
-                        ...meetup,
-                        imageUrl: imageUrl,
-                        id: key
-                    })
+                    this.dispatch('loadMeetups')
                 })
                 .catch((error) => {
                     console.log(error)

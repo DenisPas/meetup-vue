@@ -1,6 +1,6 @@
 <template>
   <v-container class="mt-2">
-    <v-row>
+    <v-row class="mt-2">
       <v-col
         cols="12"
         sm="6"
@@ -46,14 +46,14 @@
             <v-img contain height="300px" :src="meetup.imageUrl" >
 
             </v-img>
-            <div class="title">{{ meetup.title }}</div>
+            <div class="title py-2 ">{{ meetup.title }}</div>
           </v-carousel-item>
         </v-carousel>
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="12" class="text-center">
-        <p>Join our awesome meetups!</p>
+      <v-col cols="12" class="text-center white--text">
+        <h2>Join our awesome meetups!</h2>
       </v-col>
     </v-row>
   </v-container>
