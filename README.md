@@ -1,7 +1,5 @@
 # meetup-vue
 
-# В настоящий момент проект находится на стадии разработки
-
 ## Project setup
 ```
 npm install
